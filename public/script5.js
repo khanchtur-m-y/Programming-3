@@ -1,14 +1,3 @@
-/*
-var matrix =
-   [[0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0],
-    [0, 3, 0, 0, 1, 0],
-    [2, 1, 0, 0, 0, 0],
-    ];
-*/
-
 var matrix = [];
 var side = 34;
 var sz = 25;
@@ -37,10 +26,10 @@ for (var i = 0; i < sz; i++) {
     }
 }
 
-var abc = 0;
-while (abc < 5) {
+var g = 0;
+while (g < 5) {
     matrix[Math.floor(Math.random() * sz)][Math.floor(Math.random() * sz)] = 3;//gishatich
-    abc++;
+    g++;
 }
 
 var hx = 0;
@@ -80,7 +69,7 @@ function setup() {
         }
     }
     met = new Meteor();
-    vol = new Volcano(Math.floor(random(sz/3.5, sz - sz/3.5)), Math.floor(random(sz/3.5, sz - sz/3.5)));
+    vol = new Volcano(Math.floor(random(sz / 3.5, sz - sz / 3.5)), Math.floor(random(sz / 3.5, sz - sz / 3.5)));
 }
 
 function draw() {
@@ -173,6 +162,5 @@ function draw() {
         textSize(40);
         text('Game over', 250, 350);
         text('All animals are dead', 160, 450);
-
     }
 }

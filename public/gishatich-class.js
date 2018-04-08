@@ -7,7 +7,7 @@ class Gishatich {
 		this.multiply = 0;
 	}
 
-	stanalNorKordinatner() {
+	yntrelVandak(ch) {
 		this.directions = [
 			[this.x - 1, this.y - 1],
 			[this.x, this.y - 1],
@@ -18,10 +18,7 @@ class Gishatich {
 			[this.x, this.y + 1],
 			[this.x + 1, this.y + 1]
 		];
-	}
 
-	yntrelVandak(ch) {
-		this.stanalNorKordinatner();
 		var found = [];
 		for (var i in this.directions) {
 			var x = this.directions[i][0];
@@ -66,7 +63,7 @@ class Gishatich {
 			}
 		}
 
-		else if (norVandak == undefined) {
+		else{
 			var a = Math.floor(Math.random() * 2);
 			this.sharjvel(a);
 		}
