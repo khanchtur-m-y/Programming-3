@@ -45,7 +45,7 @@ while (hg < 2) {
 }
 
 function setup() {
-    frameRate(3);
+    frameRate(1);////fps
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
 
@@ -147,7 +147,7 @@ function draw() {
     }
 
 
-    if (met.f) {
+    if (met.fellDown) {
         met.fall(Math.floor(Math.random() * sz), Math.floor(Math.random() * sz));
     }
     met.disappear(1);

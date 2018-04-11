@@ -1,12 +1,7 @@
 class Grass extends Life {
 
 	constructor(x, y) {
-		/*
-		this.x = x;
-		this.y = y;
-		this.multiply = 0;
-		*/
-		super(x, y);
+		super(x, y, 0);
 		this.directions = [
 			[this.x - 1, this.y - 1],
 			[this.x, this.y - 1],
@@ -17,7 +12,6 @@ class Grass extends Life {
 			[this.x, this.y + 1],
 			[this.x + 1, this.y + 1]
 		];
-		
 	}
 
 	yntrelVandak(ch) {
@@ -29,7 +23,6 @@ class Grass extends Life {
 				if (matrix[y][x] == ch) {
 					found.push(this.directions[i]);
 				}
-
 			}
 		}
 		return found;

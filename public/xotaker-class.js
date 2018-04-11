@@ -1,35 +1,7 @@
-class Xotaker {
-	constructor(x, y) {
-		this.x = x;
-		this.y = y;
-		this.energy = 8;
-		this.directions = [];
-		this.multiply = 0;
-	}
+class Xotaker extends Life {
 
 	yntrelVandak(ch) {
-		this.directions = [
-			[this.x - 1, this.y - 1],
-			[this.x, this.y - 1],
-			[this.x + 1, this.y - 1],
-			[this.x - 1, this.y],
-			[this.x + 1, this.y],
-			[this.x - 1, this.y + 1],
-			[this.x, this.y + 1],
-			[this.x + 1, this.y + 1]
-		];
-
-		var found = [];
-		for (var i in this.directions) {
-			var x = this.directions[i][0];
-			var y = this.directions[i][1];
-			if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-				if (matrix[x][y] == ch) {
-					found.push(this.directions[i]);
-				}
-			}
-		}
-		return found;
+		return super.yntrelVandak(ch);
 	}
 
 	sharjvel(x) {
@@ -74,14 +46,12 @@ class Xotaker {
 				matrix[norVandak[0]][norVandak[1]] = 2;
 			}
 
-
 			else {
 				var norVandak = random(this.yntrelVandak(1));
 
 				xotakerArr.push(new Xotaker(norVandak[0], norVandak[1]));
 				matrix[norVandak[0]][norVandak[1]] = 2;
 			}
-
 		}
 	}
 

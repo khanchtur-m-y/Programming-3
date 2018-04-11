@@ -4,42 +4,43 @@ class Meteor {
 		this.y;
 		this.area = [];
 		this.dis = 0;
-		this.f = true;
-		this.r = 3;
-		this.v = true;
+		this.fellDown = true;
+		this.radius = 3;
+		this.fellOnVolcano = true;
 	}
 
 	fall(x, y) {
 		this.x = x;
 		this.y = y;
-		this.f = false;
+		this.fellDown = false;
 		for (var y in matrix) {
 			for (var x in matrix[y]) {
-				if (Math.random() > 0.5)
-					if (x > this.x - this.r && x < this.x + this.r && y > this.y - this.r && y < this.y + this.r) {
-						if (x == 7 && y == 7) {
-							this.v = false;
+				
+				if (Math.random() > 0.5 && x > this.x - this.radius && x < this.x + this.radius && y > this.y - this.radius && y < this.y + this.radius) {
+					if (x == 7 && y == 7) {
+						this.fellOnVolcano = false;
+					}
+					
+					matrix[x][y] = 4;
+					var tex = [];
+					tex.push(x);
+					tex.push(y);
+					this.area.push(tex);
+					
+					for (var i in xotakerArr) {
+						if (xotakerArr[i].x > this.x - this.radius && xotakerArr[i].x < this.x + this.radius && xotakerArr[i].y > this.y - this.radius && xotakerArr[i].y < this.y + this.radius) {
+							xotakerArr.splice(i, 1);
+							break;
 						}
-						matrix[x][y] = 4;
-						var tex = [];
-						tex.push(x);
-						tex.push(y);
-						this.area.push(tex);
-
-						for (var i in xotakerArr) {
-							if (xotakerArr[i].x > this.x - this.r && xotakerArr[i].x < this.x + this.r && xotakerArr[i].y > this.y - this.r && xotakerArr[i].y < this.y + this.r) {
-								xotakerArr.splice(i, 1);
+					
+						for (var i in grassArr) {
+							if (grassArr[i].x > this.x - this.radius && grassArr[i].x < this.x + this.radius && grassArr[i].y > this.y - this.radius && grassArr[i].y < this.y + this.radius) {
+								grassArr.splice(i, 1);
 								break;
-							}
-
-							for (var i in grassArr) {
-								if (grassArr[i].x > this.x - this.r && grassArr[i].x < this.x + this.r && grassArr[i].y > this.y - this.r && grassArr[i].y < this.y + this.r) {
-									grassArr.splice(i, 1);
-									break;
-								}
 							}
 						}
 					}
+				}
 			}
 		}
 	}
@@ -52,8 +53,9 @@ class Meteor {
 			matrix[this.area[n][0]][this.area[n][1]] = 0;
 			this.area.splice(n, 1);
 		}
+		
 		if (this.area.length == 0) {
-			this.f = true;
+			this.fellDown = true;
 		}
 	}
 }

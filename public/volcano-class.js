@@ -4,30 +4,30 @@ class Volcano {
 		this.x = x;
 		this.y = y;
 		this.area = [];
-		this.ap = true;
-		this.gr = 30;
+		this.appeared = true;
+		this.growcount = 30;
 
 		this.DIRECTIONS = [
 			[this.x - 1, this.y - 1],
-			[this.x, this.y - 1],
 			[this.x + 1, this.y - 1],
-			[this.x - 1, this.y],
-			[this.x + 1, this.y],
 			[this.x - 1, this.y + 1],
-			[this.x, this.y + 1],
 			[this.x + 1, this.y + 1],
 			[this.x - 1, this.y - 2],
-			[this.x, this.y - 2],
 			[this.x + 1, this.y - 2],
 			[this.x - 2, this.y - 1],
 			[this.x + 2, this.y - 1],
-			[this.x - 2, this.y],
-			[this.x + 2, this.y],
 			[this.x - 2, this.y + 1],
 			[this.x + 2, this.y + 1],
 			[this.x - 1, this.y + 2],
-			[this.x, this.y + 2],
 			[this.x + 1, this.y + 2],
+			[this.x, this.y - 1],
+			[this.x, this.y - 2],
+			[this.x, this.y + 2],
+			[this.x, this.y + 1],
+			[this.x - 1, this.y],
+			[this.x + 1, this.y],
+			[this.x - 2, this.y],
+			[this.x + 2, this.y],
 		];
 	}
 
@@ -55,8 +55,8 @@ class Volcano {
 	}
 
 	appear() {
-		if (this.ap) {
-			this.ap = false;
+		if (this.appeared) {
+			this.appeared = false;
 			matrix[this.x][this.y] = 6;
 			for (var i in this.DIRECTIONS) {
 				matrix[this.DIRECTIONS[i][0]][this.DIRECTIONS[i][1]] = 5;
@@ -66,7 +66,7 @@ class Volcano {
 	}
 
 	recover() {
-		if (met.v) {
+		if (met.fellOnVolcano) {
 			for (var i in this.area) {
 				if (matrix[this.area[i][0]][this.area[i][1]] != 4) {
 					matrix[this.area[i][0]][this.area[i][1]] = 5;
@@ -76,10 +76,10 @@ class Volcano {
 	}
 
 	grow() {
-		if (met.v || matrix[this.x][this.y] == 6) {
-			this.gr--;
-			if (this.gr <= 0 && this.area.length < 50) {
-				this.gr = 30;
+		if (met.fellOnVolcano || matrix[this.x][this.y] == 6) {
+			this.growcount--;
+			if (this.growcount <= 0 && this.area.length < 50) {
+				this.growcount = 30;
 				for (var i = 0; i < Math.floor(this.area.length / 5); i++) {
 					var hinqar = random(this.area);
 					var norqar = this.yntrelVandak(hinqar[0], hinqar[1]);
