@@ -45,7 +45,7 @@ while (hg < 2) {
 }
 
 function setup() {
-    frameRate(1);////fps
+    frameRate(0.5);////fps 
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
 
@@ -55,16 +55,16 @@ function setup() {
                 grassArr.push(new Grass(x, y));
             }
             else if (matrix[x][y] == 2) {
-                xotakerArr.push(new Xotaker(x, y));
+                xotakerArr.push(new Xotaker(x, y, 8));
             }
             else if (matrix[x][y] == 3) {
-                gishatichArr.push(new Gishatich(x, y));
+                gishatichArr.push(new Gishatich(x, y, 40));
             }
             else if (matrix[x][y] == 7) {
-                xotaker_hArr.push(new Xotaker_h(x, y));
+                xotaker_hArr.push(new Xotaker_h(x, y, 8));
             }
             else if (matrix[x][y] == 8) {
-                gishatich_hArr.push(new Gishatich_h(x, y));
+                gishatich_hArr.push(new Gishatich_h(x, y, 40));
             }
         }
     }
