@@ -8,6 +8,9 @@ var xotaker_hArr = [];
 var gishatich_hArr = [];
 var met;
 var vol;
+var WEATHER = ["spr", "sum", "aut", "win"];
+var weatherCount = 24;
+var currentWeather;
 
 for (var i = 0; i < sz; i++) {
     matrix[i] = [];
@@ -25,7 +28,7 @@ for (var i = 0; i < sz; i++) {
         }
     }
 }
-
+/*
 var g = 0;
 while (g < 5) {
     matrix[Math.floor(Math.random() * sz)][Math.floor(Math.random() * sz)] = 3;//gishatich
@@ -43,81 +46,117 @@ while (hg < 2) {
     matrix[Math.floor(Math.random() * sz)][Math.floor(Math.random() * sz)] = 8;//hivand gishatich
     hg++;
 }
-
+*/
 function setup() {
-    frameRate(0.5);////fps 
+    frameRate(5);////fps 
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
 
     for (var y = 0; y < sz; y++) {
         for (var x = 0; x < sz; x++) {
-            if (matrix[x][y] == 1) {
-                grassArr.push(new Grass(x, y));
-            }
-            else if (matrix[x][y] == 2) {
-                xotakerArr.push(new Xotaker(x, y, 8));
-            }
-            else if (matrix[x][y] == 3) {
-                gishatichArr.push(new Gishatich(x, y, 40));
-            }
-            else if (matrix[x][y] == 7) {
-                xotaker_hArr.push(new Xotaker_h(x, y, 8));
-            }
-            else if (matrix[x][y] == 8) {
-                gishatich_hArr.push(new Gishatich_h(x, y, 40));
+            switch(matrix[x][y]) {
+                case 1:
+                    grassArr.push(new Grass(x, y));
+                break;
+
+                case 2:
+                    var ser = (Math.round(Math.random())) / 2;
+                    xotakerArr.push(new Xotaker(x, y, 8, ser));
+                    matrix[x][y] += ser;
+                break;
+                
+               /*
+                case 3:
+                    gishatichArr.push(new Gishatich(x, y, 40));
+                break;
+
+                case 7:
+                    xotaker_hArr.push(new Xotaker_h(x, y, 8));
+                break;
+
+                case 8:
+                    gishatich_hArr.push(new Gishatich_h(x, y, 40));
+                break;
+                */
             }
         }
     }
     met = new Meteor();
-    vol = new Volcano(Math.floor(random(sz / 3.5, sz - sz / 3.5)), Math.floor(random(sz / 3.5, sz - sz / 3.5)));
+    vol = new Volcano(Math.floor(random(sz / 3.5, sz - sz / 3.5)), Math.floor(random(sz / 3.5, sz - sz / 3.5)));   
 }
 
 function draw() {
+weatherCount++;
+if(weatherCount >= 25000){
+    weatherCount = 0;
+}
+if(weatherCount % 25 == 0){
+    currentWeather = WEATHER[(weatherCount / 25) % 4];
+    console.log(currentWeather);
+}
+
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
+            switch(matrix[x][y]) {
+                case 1:
+                    switch(currentWeather){
+                        case "win":
+                            fill("#ABF1CA");
+                        break;
+                    
+                        case "aut":
+                            fill("#E5AA44");
+                        break;
+                    
+                        case "spr":
+                            fill("#47DB42");
+                        break;
+                    
+                        default:
+                            fill("green");
+                        break;
+                    }
+                break;
+            
+                case 0:
+                    fill("#acacac");
+                break;
+            
+                case 2:
+                    fill("yellow");
+                break;
+            
+                case 3:
+                    fill("blue");
+                break;
+                
+                case 4:
+                    fill("#502A2A");//brown
+                break;
+            
+                case 5:
+                    fill("#37302E");//dark gray
+                break;
+                
+                case 6:
+                    fill("#CA4719");//orange
+                break;
 
-            if (matrix[x][y] == 1) {
-                fill("green");
-                rect(x * side, y * side, side, side);
+                case 7:
+                    fill("#EE745A");//peach
+                break;
+               
+                case 8:
+                    fill("#572C73");//purple
+                break;
             }
-            else if (matrix[x][y] == 0) {
-                fill("#acacac");
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 2) {
-                fill("yellow");
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 3) {
-                fill("blue");
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 4) {
-                fill("#502A2A");//brown
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 5) {
-                fill("#37302E");//dark gray
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 6) {
-                fill("#CA4719");//orange
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 7) {
-                fill("#EE745A");//peach
-                rect(x * side, y * side, side, side);
-            }
-            else if (matrix[x][y] == 8) {
-                fill("#572C73");//purple
-                rect(x * side, y * side, side, side);
-            }
+            rect(x * side, y * side, side, side);
         }
     }
 
     for (var i in grassArr) {
-        grassArr[i].bazmanal(8);
+        grassArr[i].bazmanal();
     }
 
     for (var i in xotakerArr) {
@@ -126,6 +165,7 @@ function draw() {
         xotakerArr[i].mahanal(i);
     }
 
+/*
     for (var i in gishatichArr) {
         gishatichArr[i].utel_sharjvel();
         gishatichArr[i].bazmanal(10);
@@ -145,7 +185,7 @@ function draw() {
         gishatich_hArr[i].bazmanal(10);
         gishatich_hArr[i].mahanal(i);
     }
-
+*/
 
     if (met.fellDown) {
         met.fall(Math.floor(Math.random() * sz), Math.floor(Math.random() * sz));
@@ -157,7 +197,7 @@ function draw() {
     vol.grow();
 
 
-    if (xotakerArr.length == 0 && gishatichArr.length == 0 && xotaker_hArr.length == 0 && gishatich_hArr.length == 0) {
+    if (xotakerArr.length == 0){// && gishatichArr.length == 0 && xotaker_hArr.length == 0 && gishatich_hArr.length == 0) {
         fill("red");
         textSize(40);
         text('Game over', 250, 350);

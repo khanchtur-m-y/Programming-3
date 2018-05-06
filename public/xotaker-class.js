@@ -1,5 +1,4 @@
 class Xotaker extends Life {
-
 	yntrelVandak(ch) {
 		return super.yntrelVandak(ch);
 	}
@@ -16,41 +15,52 @@ class Xotaker extends Life {
 	}
 
 	utel_sharjvel() {
-		var norVandak = random(this.yntrelVandak(1));
-
-		if (norVandak) {
-			this.multiply++;
-			this.sharjvel(1);
-			this.energy = 8;
-
-			for (var i in grassArr) {
-				if (grassArr[i].x == this.y && grassArr[i].y == this.x) {
-					grassArr.splice(i, 1);
-					break;
-				}
-			}
+		if(currentWeather == "win"){
+			var go = Math.random();
+		}
+		else{
+			var go = 0;
 		}
 
-		else if (norVandak == undefined) {
-			var a = Math.floor(Math.random() * 2);
-			this.sharjvel(a);
+		if(go < 0.5){
+			var norVandak = random(this.yntrelVandak(1));
+
+			if (norVandak) {
+				this.multiply++;
+				this.sharjvel(1);
+				this.energy = 8;
+
+				for (var i in grassArr) {
+					if (grassArr[i].x == this.y && grassArr[i].y == this.x) {
+						grassArr.splice(i, 1);
+						break;
+					}
+				}
+			}
+
+			else if (norVandak == undefined) {
+				var a = Math.floor(Math.random() * 2);
+				this.sharjvel(a);
+			}
 		}
 	}
 
 	bazmanal(b) {
-		if (this.multiply >= b) {
-			this.multiply = 0;
-			var norVandak = random(this.yntrelVandak(0));
-			if (norVandak) {
-				xotakerArr.push(new Xotaker(norVandak[0], norVandak[1]));
-				matrix[norVandak[0]][norVandak[1]] = 2;
-			}
+		if(currentWeather != "win"){
+			if (this.multiply >= b) {
+				this.multiply = 0;
+				var norVandak = random(this.yntrelVandak(0));
+				if (norVandak) {
+					xotakerArr.push(new Xotaker(norVandak[0], norVandak[1]));
+					matrix[norVandak[0]][norVandak[1]] = 2;
+				}
 
-			else {
-				var norVandak = random(this.yntrelVandak(1));
+				else {
+					var norVandak = random(this.yntrelVandak(1));
 
-				xotakerArr.push(new Xotaker(norVandak[0], norVandak[1]));
-				matrix[norVandak[0]][norVandak[1]] = 2;
+					xotakerArr.push(new Xotaker(norVandak[0], norVandak[1], 8));
+					matrix[norVandak[0]][norVandak[1]] = 2;
+				}
 			}
 		}
 	}

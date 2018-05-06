@@ -1,10 +1,11 @@
 class Life {
-    constructor(x, y, e){
+    constructor(x, y, e, ser){
         this.x = x;
 		this.y = y;
         this.multiply = 0;
 		this.directions = [];
 		this.energy = e;
+		this.ser = ser == 0 ? "male" : "female";
     }
 
 	yntrelVandak(ch) {

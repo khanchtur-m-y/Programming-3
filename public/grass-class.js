@@ -1,7 +1,7 @@
 class Grass extends Life {
 
 	constructor(x, y) {
-		super(x, y, 0);
+		super(x, y, undefined, undefined);
 		this.directions = [
 			[this.x - 1, this.y - 1],
 			[this.x, this.y - 1],
@@ -28,10 +28,16 @@ class Grass extends Life {
 		return found;
 	}
 
-	bazmanal(z) {
+	bazmanal() {
 		this.multiply++;
+		if(currentWeather == "win"){
+			var mul_time = 30; 
+		}
+		else{
+			var mul_time = 8;
+		}
 		var norVandak = random(this.yntrelVandak(0));
-		if (this.multiply >= z && norVandak) {
+		if (this.multiply >= mul_time && norVandak) {
 			grassArr.push(new Grass(norVandak[0], norVandak[1]));
 			matrix[norVandak[1]][norVandak[0]] = 1;
 			this.multiply = 0;
