@@ -1,6 +1,6 @@
 var matrix = [];
 var side = 34;
-var sz = 25;
+var sz = 23;
 var grassArr = [];
 var xotakerArr = [];
 var gishatichArr = [];
@@ -8,9 +8,12 @@ var xotaker_hArr = [];
 var gishatich_hArr = [];
 var met;
 var vol;
-var WEATHER = ["spr", "sum", "aut", "win"];
+var WEATHER = ["spring", "summmer", "autumn", "winter"];
 var weatherCount = 24;
 var currentWeather;
+var pWeather = document.getElementById("pWeather");
+var pBomb = document.getElementById("pBomb");
+
 
 for (var i = 0; i < sz; i++) {
     matrix[i] = [];
@@ -51,6 +54,8 @@ function setup() {
     frameRate(5);////fps 
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
+
+    pBomb.innerText = " a";
 
     for (var y = 0; y < sz; y++) {
         for (var x = 0; x < sz; x++) {
@@ -93,6 +98,7 @@ if(weatherCount >= 25000){
 if(weatherCount % 25 == 0){
     currentWeather = WEATHER[(weatherCount / 25) % 4];
     console.log(currentWeather);
+    pWeather.innerText = currentWeather;
 }
 
 
@@ -101,15 +107,15 @@ if(weatherCount % 25 == 0){
             switch(matrix[x][y]) {
                 case 1:
                     switch(currentWeather){
-                        case "win":
+                        case "winter":
                             fill("#ABF1CA");
                         break;
                     
-                        case "aut":
-                            fill("#E5AA44");
+                        case "autumn":
+                            fill("#D59C3B");
                         break;
                     
-                        case "spr":
+                        case "spring":
                             fill("#47DB42");
                         break;
                     
@@ -126,7 +132,11 @@ if(weatherCount % 25 == 0){
                 case 2:
                     fill("yellow");
                 break;
+
+                case 2.5:
+                    fill("#FFC500"); //a bit darker yellow
             
+              /*
                 case 3:
                     fill("blue");
                 break;
@@ -150,6 +160,7 @@ if(weatherCount % 25 == 0){
                 case 8:
                     fill("#572C73");//purple
                 break;
+                */
             }
             rect(x * side, y * side, side, side);
         }
@@ -161,7 +172,7 @@ if(weatherCount % 25 == 0){
 
     for (var i in xotakerArr) {
         xotakerArr[i].utel_sharjvel();
-        xotakerArr[i].bazmanal(10);
+        xotakerArr[i].bazmanal(8);
         xotakerArr[i].mahanal(i);
     }
 
@@ -195,6 +206,20 @@ if(weatherCount % 25 == 0){
     vol.appear();
     vol.recover();
     vol.grow();
+
+    var maleCount = 0;
+    var femaleCount = 0;
+    
+    for (var i in xotakerArr){
+        if(xotakerArr[i].ser == "male"){
+            maleCount++;
+        }
+        else{
+            femaleCount++;
+        }
+    }
+
+    console.log(maleCount + " " + femaleCount);
 
 
     if (xotakerArr.length == 0){// && gishatichArr.length == 0 && xotaker_hArr.length == 0 && gishatich_hArr.length == 0) {

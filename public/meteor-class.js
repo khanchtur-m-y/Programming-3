@@ -13,6 +13,7 @@ class Meteor {
 		this.x = x;
 		this.y = y;
 		this.fellDown = false;
+		
 		for (var y in matrix) {
 			for (var x in matrix[y]) {
 				

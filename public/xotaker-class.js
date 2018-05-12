@@ -8,6 +8,9 @@ class Xotaker extends Life {
 		if (norVandak) {
 			matrix[this.x][this.y] = 0;
 			matrix[norVandak[0]][norVandak[1]] = 2;
+			if(this.ser == "female"){
+				matrix[norVandak[0]][norVandak[1]] += 0.5;
+			}
 
 			this.x = norVandak[0];
 			this.y = norVandak[1];
@@ -15,7 +18,7 @@ class Xotaker extends Life {
 	}
 
 	utel_sharjvel() {
-		if(currentWeather == "win"){
+		if(currentWeather == "winter"){
 			var go = Math.random();
 		}
 		else{
@@ -46,21 +49,23 @@ class Xotaker extends Life {
 	}
 
 	bazmanal(b) {
-		if(currentWeather != "win"){
+		if(currentWeather != "winter" && this.ser == "female" && this.yntrelVandak(2)){	
 			if (this.multiply >= b) {
 				this.multiply = 0;
 				var norVandak = random(this.yntrelVandak(0));
 				if (norVandak) {
-					xotakerArr.push(new Xotaker(norVandak[0], norVandak[1]));
+					xotakerArr.push(new Xotaker(norVandak[0], norVandak[1], 8, Math.round(Math.random())));
 					matrix[norVandak[0]][norVandak[1]] = 2;
 				}
 
+				/*
 				else {
 					var norVandak = random(this.yntrelVandak(1));
 
-					xotakerArr.push(new Xotaker(norVandak[0], norVandak[1], 8));
+					xotakerArr.push(new Xotaker(norVandak[0], norVandak[1], 8, Math.round(Math.random())));
 					matrix[norVandak[0]][norVandak[1]] = 2;
 				}
+				*/
 			}
 		}
 	}

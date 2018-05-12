@@ -31,7 +31,7 @@ class Grass extends Life {
 	bazmanal() {
 		this.multiply++;
 		if(currentWeather == "win"){
-			var mul_time = 30; 
+			var mul_time = 300; 
 		}
 		else{
 			var mul_time = 8;
